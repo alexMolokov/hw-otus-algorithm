@@ -19,7 +19,6 @@ issues:
         - gosec
   exclude:
     - "unexported-return: exported func"
-    - "test helper function should start from"
 
 linters:
   disable-all: true

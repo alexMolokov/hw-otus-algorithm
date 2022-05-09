@@ -55,6 +55,8 @@ func (ts *tester) RunTests() {
 		require.Equal(ts.T, resultTest, resultExpected, fmt.Sprintf("Must equal inFile=%s, outFile=%s", inFile, outFile))
 		tNum++
 	}
+
+	require.Greater(ts.T, tNum, 0, "Must be more then zero tests")
 }
 
 func NewTester(t *testing.T, task ITaskRunner, path string) *tester {
