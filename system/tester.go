@@ -31,6 +31,7 @@ func (ts *tester) RunTests() {
 	}
 
 	for {
+
 		inFile := fmt.Sprintf(ts.Path+"test.%d.in", tNum)
 		outFile := fmt.Sprintf(ts.Path+"test.%d.out", tNum)
 		if _, err := os.Stat(inFile); errors.Is(err, os.ErrNotExist) {
@@ -40,19 +41,23 @@ func (ts *tester) RunTests() {
 			break
 		}
 
-		dataIn, err := ioutil.ReadFile(inFile)
-		require.NoError(ts.T, err, fmt.Sprintf("Can't read file %s", inFile))
-		dataOut, err := ioutil.ReadFile(outFile)
-		require.NoError(ts.T, err, fmt.Sprintf("Can't read file %s", outFile))
+		ts.T.Run(fmt.Sprintf("test num %d", tNum), func(t *testing.T) {
+			dataIn, err := ioutil.ReadFile(inFile)
+			require.NoError(t, err, fmt.Sprintf("Can't read file %s", inFile))
+			dataOut, err := ioutil.ReadFile(outFile)
+			require.NoError(t, err, fmt.Sprintf("Can't read file %s", outFile))
 
-		data := strings.Split(string(dataIn), sep)
-		for k, v := range data {
-			data[k] = strings.Trim(v, " "+sep)
-		}
+			data := strings.Split(string(dataIn), sep)
+			for k, v := range data {
+				data[k] = strings.Trim(v, " "+sep)
+			}
 
-		resultTest := ts.TaskRunner.Run(data)
-		resultExpected := strings.Trim(string(dataOut), " "+sep)
-		require.Equal(ts.T, resultTest, resultExpected, fmt.Sprintf("Must equal inFile=%s, outFile=%s", inFile, outFile))
+			resultTest := ts.TaskRunner.Run(data)
+			resultExpected := strings.Trim(string(dataOut), " "+sep)
+			require.Equal(t, resultExpected, resultTest, fmt.Sprintf("Must equal inFile=%s, outFile=%s", inFile, outFile))
+			fmt.Printf(" in %#v, out = %s, excepted = %s", data, resultTest, resultExpected)
+		})
+
 		tNum++
 	}
 
