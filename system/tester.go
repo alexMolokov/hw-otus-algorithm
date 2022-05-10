@@ -55,7 +55,7 @@ func (ts *tester) RunTests() {
 			resultTest := ts.TaskRunner.Run(data)
 			resultExpected := strings.Trim(string(dataOut), " "+sep)
 			require.Equal(t, resultExpected, resultTest, fmt.Sprintf("Must equal inFile=%s, outFile=%s", inFile, outFile))
-			fmt.Printf(" in %#v, out = %s, excepted = %s", data, resultTest, resultExpected)
+			fmt.Printf(" in %#v, out = %s, excepted = %s\n", data, resultTest, resultExpected)
 		})
 
 		tNum++
