@@ -3,6 +3,7 @@ package simplesort
 import (
 	"fmt"
 	"strconv"
+	"strings"
 )
 
 type Bubble struct {
@@ -36,9 +37,18 @@ type BubbleRunner struct {
 }
 
 func (r *BubbleRunner) Run(in []string) string {
-	n, _ := strconv.Atoi(in[0])
-	//result := Iterate(int64(n))
-	//return fmt.Sprintf("%d", result)
+	size, _ := strconv.Atoi(in[0])
+	data := strings.Split(in[1], " ")
+
+	arr := make([]int, size)
+	for i := 0; i < size; i++ {
+		arr[i], _ = strconv.Atoi(data[i])
+	}
+
+	r.bubble = NewBubble(&arr)
+
+	result := fmt.Sprintf("%v", r.bubble.Sort())
+	return result[1 : len(result)-1]
 }
 
 func NewBubbleRunner(arr *[]int) *BubbleRunner {
