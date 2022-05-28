@@ -1,10 +1,11 @@
 package simplesort
 
 import (
-	"github.com/alexMolokov/hw-otus-algorithm/system"
 	"os"
 	"path/filepath"
 	"testing"
+
+	"github.com/alexMolokov/hw-otus-algorithm/system"
 )
 
 func TestBubbleSortRandom(t *testing.T) {

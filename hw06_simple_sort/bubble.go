@@ -51,8 +51,6 @@ func (r *BubbleRunner) Run(in []string) string {
 	return result[1 : len(result)-1]
 }
 
-func NewBubbleRunner(arr *[]int) *BubbleRunner {
-	return &BubbleRunner{
-		bubble: NewBubble(arr),
-	}
+func NewBubbleRunner() *BubbleRunner {
+	return &BubbleRunner{}
 }
