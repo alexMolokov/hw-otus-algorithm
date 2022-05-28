@@ -17,6 +17,8 @@ issues:
         - dupl
         - gocyclo
         - gosec
+  exclude:
+    - "unexported-return: exported func"
 
 linters:
   disable-all: true
