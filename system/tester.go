@@ -8,6 +8,7 @@ import (
 	"runtime"
 	"strings"
 	"testing"
+	"time"
 
 	"github.com/stretchr/testify/require"
 )
@@ -52,10 +53,15 @@ func (ts *tester) RunTests() {
 				data[k] = strings.Trim(v, " "+sep)
 			}
 
+			timeStart := time.Now()
 			resultTest := ts.TaskRunner.Run(data)
+			duration := time.Since(timeStart)
+			seconds := float64(duration) / float64(time.Second)
+
 			resultExpected := strings.Trim(string(dataOut), " "+sep)
 			require.Equal(t, resultExpected, resultTest, fmt.Sprintf("Must equal inFile=%s, outFile=%s", inFile, outFile))
-			fmt.Printf(" in %#v, out = %s, excepted = %s\n", data, resultTest, resultExpected)
+			//fmt.Printf("time = %.3f s, in %#v, out = %s, excepted = %s\n ", seconds, data, resultTest, resultExpected)
+			fmt.Printf("time = %.3f s", seconds)
 		})
 
 		tNum++
