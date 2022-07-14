@@ -11,13 +11,12 @@ import (
 
 func TestAvlTreeRandom(t *testing.T) {
 	lenData := 1000
-	lenDelete := 100
+	lenDelete, lenSearch := 100, 100
 
 	m := make(map[int]bool, lenData)
 	tree := AvlTree{}
 	rand.Seed(time.Now().UnixNano())
 
-	tm := time.Now()
 	i := 0
 	for i < lenData {
 		el := rand.Intn(1000000)
@@ -29,6 +28,17 @@ func TestAvlTreeRandom(t *testing.T) {
 		}
 	}
 
+	tm := time.Now()
+	for key := range m {
+		tree.search(key)
+		lenSearch--
+		if lenSearch <= 0 {
+			break
+		}
+	}
+	fmt.Printf("search time rand = %d mks \n", time.Since(tm).Microseconds())
+
+	tm = time.Now()
 	for key := range m {
 		tree.Remove(key)
 		lenDelete--
@@ -36,15 +46,13 @@ func TestAvlTreeRandom(t *testing.T) {
 			break
 		}
 	}
-
+	fmt.Printf("delete time rand = %d mks \n", time.Since(tm).Microseconds())
 	require.True(t, true)
-	fmt.Printf("time = %d mks", time.Since(tm).Microseconds())
 }
 
 func TestAvlTreeSorted(t *testing.T) {
-	tm := time.Now()
 	lenData := 1000
-	lenDelete := 100
+	lenDelete, lenSearch := 100, 100
 
 	m := make(map[int]bool, lenData)
 	tree := AvlTree{}
@@ -56,6 +64,18 @@ func TestAvlTreeSorted(t *testing.T) {
 		i++
 	}
 
+	// search
+	tm := time.Now()
+	for key := range m {
+		tree.search(key)
+		lenSearch--
+		if lenSearch <= 0 {
+			break
+		}
+	}
+	fmt.Printf("search time sorted = %d mks \n", time.Since(tm).Microseconds())
+
+	tm = time.Now()
 	for key := range m {
 		tree.Remove(key)
 		lenDelete--
@@ -63,7 +83,7 @@ func TestAvlTreeSorted(t *testing.T) {
 			break
 		}
 	}
+	fmt.Printf("delete time sorted = %d mks \n", time.Since(tm).Microseconds())
 
 	require.True(t, true)
-	fmt.Printf("time = %d mks", time.Since(tm).Microseconds())
 }
