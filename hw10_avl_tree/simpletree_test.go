@@ -54,7 +54,7 @@ func TestSimpleTreeRandom(t *testing.T) {
 	for key := range m {
 		require.True(t, tree.Search(key), "all different elements must be in after delete")
 	}
-	fmt.Printf("time = %d ms", time.Since(tm).Milliseconds())
+	fmt.Printf("time = %d mks", time.Since(tm).Microseconds())
 }
 
 func TestSimpleTreeSorted(t *testing.T) {
@@ -98,5 +98,5 @@ func TestSimpleTreeSorted(t *testing.T) {
 		require.True(t, tree.Search(key), "all different elements must be in after delete")
 	}
 
-	fmt.Printf("time = %d ms", time.Since(tm).Milliseconds())
+	fmt.Printf("time = %d mks", time.Since(tm).Microseconds())
 }
