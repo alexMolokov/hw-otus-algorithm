@@ -32,7 +32,6 @@ func (ts *tester) RunTests() {
 	}
 
 	for {
-
 		inFile := fmt.Sprintf(ts.Path+"test.%d.in", tNum)
 		outFile := fmt.Sprintf(ts.Path+"test.%d.out", tNum)
 		if _, err := os.Stat(inFile); errors.Is(err, os.ErrNotExist) {
