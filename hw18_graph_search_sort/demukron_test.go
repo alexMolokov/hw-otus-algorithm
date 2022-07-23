@@ -24,7 +24,7 @@ func TestDemukronThreeVertex(t *testing.T) {
 	require.Equal(t, [][]int{{2}, {1}, {0}}, result)
 }
 
-// TestDemukron Есть граф состоящий из 3 вершин (0,1,2) 1->0, 1->2
+// TestDemukron Есть граф состоящий из 3 вершин (0,1,2) 1->0, 1->2.
 func TestDemukron(t *testing.T) {
 	graph := [][]int{{-1, -1}, {0, 2}, {-1, -1}}
 	tAlg := NewDemukron(graph)
