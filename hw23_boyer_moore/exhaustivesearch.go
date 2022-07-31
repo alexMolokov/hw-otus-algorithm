@@ -20,14 +20,14 @@ func (s *ExhaustiveSearch) Search(text, pattern string) int {
 	to := lenText - lenPattern
 
 	for i := 0; i <= to; i++ {
-		j := 0
-		for j < lenPattern {
+		j := lenPattern - 1
+		for j >= 0 {
 			if patternR[j] != textR[i+j] {
 				break
 			}
-			j++
+			j--
 		}
-		if j == lenPattern {
+		if j == -1 {
 			return i
 		}
 	}
