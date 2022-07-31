@@ -6,8 +6,12 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestExhaustiveSearch(t *testing.T) {
-	data := []struct {
+func getData() []struct {
+	text     string
+	pattern  string
+	expected int
+} {
+	return []struct {
 		text     string
 		pattern  string
 		expected int
@@ -18,7 +22,10 @@ func TestExhaustiveSearch(t *testing.T) {
 		{text: "Found in text", pattern: "text", expected: 9},
 		{text: "Я иду гуляю по Москве", pattern: "по", expected: 12},
 	}
+}
 
+func TestExhaustiveSearch(t *testing.T) {
+	data := getData()
 	search := ExhaustiveSearch{}
 	for _, v := range data {
 		result := search.Search(v.text, v.pattern)
