@@ -19,6 +19,11 @@ func getData() []struct {
 		{text: "Not found", pattern: "some", expected: -1},
 		{text: "Not found in text", pattern: "текст", expected: -1},
 		{text: "aaaaaaaaaaaaba", pattern: "aaaaaaaaaab", expected: 2},
+		{text: "aaabaaaaaaaa", pattern: "baaa", expected: 3},
+		{text: "aababaaaaaaaa", pattern: "baba", expected: 2},
+		{text: "bacdbaddba", pattern: "baddba", expected: 4}, // здесь нужно при смещении использовать префикс
+		{text: "caddbaddba", pattern: "baddba", expected: 4}, // здесь нужно при смещении использовать префикс
+		{text: "колокол", pattern: "окол", expected: 3},
 		{text: "First", pattern: "Fi", expected: 0},
 		{text: "Found in text", pattern: "text", expected: 9},
 		{text: "Я иду гуляю по Москве", pattern: "по", expected: 12},
